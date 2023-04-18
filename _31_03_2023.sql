@@ -196,13 +196,13 @@ INSERT INTO Staff(firstname, lastname, position, age, has_child, username) VALUE
 -- where age > 30 and has_child = 'N';
 
 -- select * from staff
--- where position = 'Middle Blogger' and age > 20;
+-- where position like 'Middle%' and age > 20;
 
 -- select * from staff
 -- where firstname like 'a%' and has_child = 'N';
 
 -- select * from staff
--- where age < 25 and position = 'Junior Blogger' and has_child = 'N';
+-- where age < 25 and position like 'Junior%' and has_child = 'N';
 
 -- select * from staff
 -- where firstname = 'Anna'and (position like 'Middle%' ||
