@@ -1,3 +1,5 @@
+-- https://western-appeal-39b.notion.site/GenTech-Jun-1-2023-6e155fabc0b94466bbaab0f30c62e01a 
+
 -- Выполнить расчет З/П менеджеров за весь период заказов из расчета ставки в 10%
 select 
 	Employees.LastName,
