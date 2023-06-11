@@ -4,12 +4,18 @@
 select 
 	Employees.LastName,
     Employees.FirstName,
-    count(*) as total_order,
-    count(*) * 0.1 as salary
-from Orders
+    sum(OrderDetails.Quantity * Products.Price) * 0.1 as Salary
+from OrderDetails
+inner join Products 
+on OrderDetails.ProductID = Products.ProductID
+
 inner join Employees
 on Orders.EmployeeID = Employees.EmployeeID
-group by Orders.EmployeeID;
+
+inner join Orders 
+on OrderDetails.OrderID = Orders.OrderID
+group by Employees.EmployeeID
+order by salary desc;
 
 -- Вывести сотрудников, у которых ко-во заказов менее 20
 select
@@ -24,20 +30,18 @@ having total_orders <= 20
 order by total_orders desc;
 
 -- Вывести названия компаний-перевозчиков и сколько заказов каждая из них доставила
-select
-	Suppliers.SupplierName,
-    count(*) total_orders
-from OrderDetails
-inner join Products
-on OrderDetails.ProductID = Products.ProductID
-inner join Suppliers
-on Products.SupplierID = Suppliers.SupplierID
-group by OrderDetails.OrderID;
+SELECT 
+	Shippers.ShipperName,
+    count(*) as TotalOrders
+FROM Orders 
+inner join Shippers
+on Orders.ShipperID = Shippers.ShipperID
+group by Shippers.ShipperName; 
 
 -- Для клиентов из Mexico очистить контактные имена
 set sql_safe_updates = 0;
 update Customers
-set ContactName= ""
+set ContactName= null
 where Country = "Mexico";
 set sql_safe_updates = 1;
 
